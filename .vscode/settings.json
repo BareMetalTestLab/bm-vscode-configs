@@ -1,0 +1,5 @@
+{
+    "bm.firmwareFileName": "firmware.elf",
+    "bm.svdFileName": "STM32F765.svd",
+    "bm.deviceName": "STM32F765ZG"
+}
