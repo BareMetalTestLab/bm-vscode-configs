@@ -1,16 +1,17 @@
 {
-    "tasks": [
-        {
-            "type": "cmake",
-            "label": "CMake: build",
-            "command": "build",
-            "targets": [
-                "all"
-            ],
-            "group": "build",
-            "problemMatcher": [],
-            "detail": "CMake template build task"
-        }
-    ],
-    "version": "2.0.0"
+	"tasks": [
+		{
+			"label": "RemoteDebugSetup",
+			"type": "shell",
+			"command": "bm_remoteHostName=${config:bm.remoteHostName} bm_remoteHost=${config:bm.remoteHost} bash .vscode/remote_debug_start.sh",
+			"group": "build",
+			"options": {
+				"env": {
+					"bm_deviceName": "${config:bm.deviceName}",
+					"bm_jlinkSerial": "${config:bm.jlinkSerial}"
+				}
+			}
+		}
+	],
+	"version": "2.0.0"
 }

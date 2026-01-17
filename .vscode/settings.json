@@ -1,5 +1,8 @@
 {
     "bm.firmwareFileName": "firmware.elf",
     "bm.svdFileName": "STM32F765.svd",
-    "bm.deviceName": "STM32F765ZG"
+    "bm.deviceName": "STM32F765ZG",
+    "bm.remoteHostName": "host_name",
+    "bm.remoteHost": "192.168.1.100",
+    "bm.jlinkSerial": "772440171",
 }

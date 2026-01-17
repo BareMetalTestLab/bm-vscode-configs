@@ -66,6 +66,46 @@
             "showDevDebugOutput": "none"
         },
         {
+            "name": "Launch Remote jlink with setup",
+            "request": "launch",
+            "type": "cortex-debug",
+            "preLaunchTask": "RemoteDebugSetup",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            },
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceFolder}/build/${config:bm.firmwareFileName}",
+            "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
+            "servertype": "jlink",
+            "ipAddress": "${input:IPAddressID}",
+            "interface": "swd",
+            "device": "${config:bm.deviceName}",
+            "gdbPath": "arm-none-eabi-gdb",
+            "runToMain": true,
+            "runToEntryPoint": "main",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            },
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "none"
+            ,
+            // Pass the password from input to the script as REMOTE_DEBUG_PASS
+            "options": {
+                "env": {
+                    "REMOTE_DEBUG_PASS": "${input:RemoteDebugPassword}"
+                }
+            }
+        },
+        {
             "name": "Launch jlink",
             "request": "launch",
             "type": "cortex-debug",
@@ -135,6 +175,11 @@
             "id": "IPAddressID",
             "description": "IP of the J-Link GDB Server",
             "default": "192.168.1.100"
+        },
+        {
+            "type": "promptString",
+            "id": "RemoteDebugPassword",
+            "description": "Password for remote debug user"
         }
     ],
 }
