@@ -3,7 +3,23 @@
 		{
 			"label": "RemoteDebugSetup",
 			"type": "shell",
-			"command": "bm_remoteHostName=${config:bm.remoteHostName} bm_remoteHost=${config:bm.remoteHost} bash .vscode/remote_debug_start.sh",
+			"command": "remote_debug_host_name=${config:bm.remoteHostName} remote_debug_host=${input:IPAddressID} remote_debug_password=${input:RemoteDebugPassword} bash .vscode/remote_debug_start.sh",
+			"isBackground": true,
+			"problemMatcher": {
+				"pattern": [
+					{
+						"regexp": ".",
+						"file": 1,
+						"location": 2,
+						"message": 3
+					}
+				],
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "Starting remote debug",
+					"endsPattern": "Waiting for client connections..."
+				}
+			},
 			"group": "build",
 			"options": {
 				"env": {
@@ -11,6 +27,20 @@
 					"bm_jlinkSerial": "${config:bm.jlinkSerial}"
 				}
 			}
+		}
+	],
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "IPAddressID",
+			"description": "IP of the J-Link GDB Server",
+			"default": "192.168.1.100",
+		},
+		{
+			"type": "promptString",
+			"password": true,
+			"id": "RemoteDebugPassword",
+			"description": "Password for remote debug user"
 		}
 	],
 	"version": "2.0.0"

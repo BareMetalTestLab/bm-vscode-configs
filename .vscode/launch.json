@@ -1,6 +1,6 @@
 {
     "version": "0.2.0",
-    "configurations": [     
+    "configurations": [
         {
             "name": "Launch Remote jlink",
             "request": "launch",
@@ -96,14 +96,7 @@
                 ]
             },
             "rtos": "FreeRTOS",
-            "showDevDebugOutput": "none"
-            ,
-            // Pass the password from input to the script as REMOTE_DEBUG_PASS
-            "options": {
-                "env": {
-                    "REMOTE_DEBUG_PASS": "${input:RemoteDebugPassword}"
-                }
-            }
+            "showDevDebugOutput": "none",
         },
         {
             "name": "Launch jlink",
@@ -167,19 +160,13 @@
             "rtos": "FreeRTOS",
             "showDevDebugOutput": "none"
         }
-    ],    
-
+    ],
     "inputs": [
         {
             "type": "promptString",
             "id": "IPAddressID",
             "description": "IP of the J-Link GDB Server",
             "default": "192.168.1.100"
-        },
-        {
-            "type": "promptString",
-            "id": "RemoteDebugPassword",
-            "description": "Password for remote debug user"
         }
     ],
 }
