@@ -4,4 +4,6 @@
     "bm.deviceName": "STM32F103RE",
     "bm.remoteHostName": "host_name",
     "bm.jlinkSerial": "772440171",
+    
+    "debug.onTaskErrors": "debugAnyway"
 }

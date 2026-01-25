@@ -1,3 +1,20 @@
+## ⚠️ Important: Known VS Code Bug
+
+If there are errors in the Problems panel, when starting a debug session with a preLaunchTask (such as RemoteDebugSetup), you will see the message:
+
+   Errors exist after running preLaunchTask 'RemoteDebugSetup'.
+
+Even if the task completed successfully, VS Code will show this warning and may prevent debugging from starting. However, you can continue by clicking the 'Debug Anyway' button in the notification.
+
+In this project configuration, you will not see this warning by default, because the required setting is already present:
+
+    "debug.onTaskErrors": "debugAnyway"
+in `.vscode/settings.json`. This allows debugging to continue automatically even if there are errors in the Problems panel.
+
+
+
+This bug has not been fixed for over 3 years, despite being acknowledged by the VS Code team. More details: https://dev.to/codepo8/running-a-dedicated-local-server-for-a-vs-code-debugging-session-using-tasks-25ck
+
 # Baremetal VS Code Project Template
 
 This repository is a template for baremetal embedded projects, optimized for development and debugging in Visual Studio Code.

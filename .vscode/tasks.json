@@ -27,9 +27,20 @@
 					"bm_jlinkSerial": "${config:bm.jlinkSerial}"
 				}
 			}
-		}
+		},
+		{
+			"label": "RemoteDebugTeardown",
+			"type": "shell",
+			"command": "echo ${input:terminate}",
+		},
 	],
 	"inputs": [
+		{
+			"id": "terminate",
+			"type": "command",
+			"command": "workbench.action.tasks.terminate",
+			"args": "terminateAll"
+		},
 		{
 			"type": "promptString",
 			"id": "IPAddressID",

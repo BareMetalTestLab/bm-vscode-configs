@@ -70,6 +70,7 @@
             "request": "launch",
             "type": "cortex-debug",
             "preLaunchTask": "RemoteDebugSetup",
+            "postDebugTask": "RemoteDebugTeardown",
             "liveWatch": {
                 "enabled": true,
                 "samplesPerSecond": 4
