@@ -15,6 +15,16 @@ export REMOTE_DEBUG_HOST="$host_name@$ip_host"
 echo "Starting remote debug"
 echo "Stopping previous JLinkRemoteServer processes on remote host (if any)"
 if [ -n "$password" ]; then
+    if ! command -v sshpass >/dev/null 2>&1; then
+        echo "Error: sshpass is required for password authentication but was not found."
+        unameOut="$(uname -s)"
+        case "${unameOut}" in
+            Linux*)   echo "Install with: sudo apt install sshpass (Debian/Ubuntu) or sudo yum install sshpass (Fedora/CentOS)" ;;
+            Darwin*)  echo "Install with: brew install sshpass (macOS/Homebrew)" ;;
+            *)        echo "Please install sshpass for your OS. See https://linux.die.net/man/1/sshpass" ;;
+        esac
+        exit 2
+    fi
     SSH_CMD="sshpass -p \"$password\" ssh -o StrictHostKeyChecking=no"
 else
     SSH_CMD="ssh"
