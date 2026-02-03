@@ -1,8 +1,22 @@
 {
     "version": "0.2.0",
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "IPAddressID",
+            "description": "IP of the J-Link GDB Server",
+            "default": "192.168.1.100"
+        },
+        {
+            "type": "promptString",
+            "id": "BLACKMAGIC",
+            "description": "GDB Target for BlackMagic Probe <ip:port> or <serial>",
+            "default": "COM1"
+        }
+    ],
     "configurations": [
         {
-            "name": "Launch Remote jlink",
+            "name": "Launch (Remote SEGGER JLink)",
             "request": "launch",
             "type": "cortex-debug",
             "liveWatch": {
@@ -10,7 +24,7 @@
                 "samplesPerSecond": 4
             },
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceFolder}/build/${config:bm.firmwareFileName}",
+            "executable": "${workspaceFolder}/${config:bm.firmwareFileName}",
             "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
             "servertype": "jlink",
             "ipAddress": "${input:IPAddressID}",
@@ -34,7 +48,7 @@
             "showDevDebugOutput": "none"
         },
         {
-            "name": "Attach Remote jlink",
+            "name": "Attach (Remote SEGGER JLink)",
             "request": "attach",
             "type": "cortex-debug",
             "liveWatch": {
@@ -42,7 +56,7 @@
                 "samplesPerSecond": 4
             },
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceFolder}/build/${config:bm.firmwareFileName}",
+            "executable": "${workspaceFolder}/${config:bm.firmwareFileName}",
             "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
             "servertype": "jlink",
             "ipAddress": "${input:IPAddressID}",
@@ -66,7 +80,7 @@
             "showDevDebugOutput": "none"
         },
         {
-            "name": "Launch Remote jlink with setup",
+            "name": "Launch (Remote SEGGER JLink with setup on host)",
             "request": "launch",
             "type": "cortex-debug",
             "preLaunchTask": "RemoteDebugSetup",
@@ -76,7 +90,7 @@
                 "samplesPerSecond": 4
             },
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceFolder}/build/${config:bm.firmwareFileName}",
+            "executable": "${workspaceFolder}/${config:bm.firmwareFileName}",
             "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
             "servertype": "jlink",
             "ipAddress": "${input:IPAddressID}",
@@ -100,7 +114,7 @@
             "showDevDebugOutput": "none",
         },
         {
-            "name": "Launch jlink",
+            "name": "Launch (SEGGER JLink)",
             "request": "launch",
             "type": "cortex-debug",
             "liveWatch": {
@@ -108,7 +122,7 @@
                 "samplesPerSecond": 4
             },
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceFolder}/build/${config:bm.firmwareFileName}",
+            "executable": "${workspaceFolder}/${config:bm.firmwareFileName}",
             "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
             "servertype": "jlink",
             "interface": "swd",
@@ -131,7 +145,7 @@
             "showDevDebugOutput": "none"
         },
         {
-            "name": "Attach jlink",
+            "name": "Attach (SEGGER JLink)",
             "request": "attach",
             "type": "cortex-debug",
             "liveWatch": {
@@ -139,7 +153,7 @@
                 "samplesPerSecond": 4
             },
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceFolder}/build/${config:bm.firmwareFileName}",
+            "executable": "${workspaceFolder}/${config:bm.firmwareFileName}",
             "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
             "servertype": "jlink",
             "interface": "swd",
@@ -160,14 +174,42 @@
             },
             "rtos": "FreeRTOS",
             "showDevDebugOutput": "none"
-        }
-    ],
-    "inputs": [
+        },
         {
-            "type": "promptString",
-            "id": "IPAddressID",
-            "description": "IP of the J-Link GDB Server",
-            "default": "192.168.1.100"
+            "name": "Launch FW (BlackMagic Probe)",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/${config:bm.firmwareFileName}",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "external",
+            "gdbTarget": "${input:BLACKMAGIC}",
+            "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
+            "rtos": "FreeRTOS",
+            "runToEntryPoint": "main",
+            "overrideLaunchCommands": [
+                "monitor swdp_scan",
+                "attach 1",
+                "set confirm off",
+                "set mem inaccessible-by-default off",
+                "load"
+            ]
+        },
+        {
+            "name": "Attach FW (BlackMagic Probe)",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/${config:bm.firmwareFileName}",
+            "request": "attach",
+            "type": "cortex-debug",
+            "servertype": "external",
+            "gdbTarget": "${input:BLACKMAGIC}",
+            "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
+            "rtos": "FreeRTOS",
+            "postAttachCommands": [
+                "monitor swdp_scan",
+                "attach 1",
+                "set confirm off",
+                "set mem inaccessible-by-default off",
+            ]
         }
-    ],
+    ]
 }

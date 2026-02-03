@@ -1,5 +1,5 @@
 {
-    "bm.firmwareFileName": "firmware.elf",
+    "bm.firmwareFileName": "/build/firmware.elf",
     "bm.svdFileName": "STM32F103.svd",
     "bm.deviceName": "STM32F103RE",
     "bm.remoteHostName": "host_name",
