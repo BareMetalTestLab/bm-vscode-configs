@@ -176,40 +176,37 @@
             "showDevDebugOutput": "none"
         },
         {
-            "name": "Launch FW (BlackMagic Probe)",
+            "name": "Launch FW with RTT (BlackMagic Probe)",
             "cwd": "${workspaceFolder}",
             "executable": "${workspaceFolder}/${config:bm.firmwareFileName}",
             "request": "launch",
             "type": "cortex-debug",
-            "servertype": "external",
-            "gdbTarget": "${input:BLACKMAGIC}",
+            "servertype": "bmp",
+            "BMPGDBSerialPort": "${input:BLACKMAGIC}",
+            "interface": "swd",
+            "device": "${config:bm.deviceName}",
             "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
-            "rtos": "FreeRTOS",
             "runToEntryPoint": "main",
-            "overrideLaunchCommands": [
-                "monitor swdp_scan",
-                "attach 1",
-                "set confirm off",
-                "set mem inaccessible-by-default off",
-                "load"
-            ]
+            "preLaunchCommands": [
+                "monitor rtt enable",
+                "python import gdb; addr = int(gdb.parse_and_eval('&_SEGGER_RTT')); gdb.execute(f'monitor rtt ram {addr:#x} {addr+0x1000:#x}')",
+            ],
         },
         {
-            "name": "Attach FW (BlackMagic Probe)",
+            "name": "Attach FW with RTT (BlackMagic Probe)",
             "cwd": "${workspaceFolder}",
             "executable": "${workspaceFolder}/${config:bm.firmwareFileName}",
             "request": "attach",
             "type": "cortex-debug",
-            "servertype": "external",
-            "gdbTarget": "${input:BLACKMAGIC}",
+            "servertype": "bmp",
+            "BMPGDBSerialPort": "${input:BLACKMAGIC}",
+            "interface": "swd",
+            "device": "${config:bm.deviceName}",
             "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
-            "rtos": "FreeRTOS",
-            "postAttachCommands": [
-                "monitor swdp_scan",
-                "attach 1",
-                "set confirm off",
-                "set mem inaccessible-by-default off",
-            ]
+            "preAttachCommands": [
+                "monitor rtt enable",
+                "python import gdb; addr = int(gdb.parse_and_eval('&_SEGGER_RTT')); gdb.execute(f'monitor rtt ram {addr:#x} {addr+0x1000:#x}')",
+            ],
         }
     ]
 }
