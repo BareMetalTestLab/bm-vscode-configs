@@ -33,6 +33,20 @@
 			"type": "shell",
 			"command": "echo ${input:terminate}",
 		},
+		{
+			"label": "BlackMagic RTT Terminal",
+			"type": "shell",
+			"command": "TARGET='${input:BlackMagicRTT}'; if [[ $TARGET == *:* ]]; then nc ${TARGET%%:*} ${TARGET##*:}; else screen $TARGET 115200; fi",
+			"isBackground": true,
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "dedicated",
+				"showReuseMessage": false
+			}
+		},
 	],
 	"inputs": [
 		{
@@ -52,6 +66,12 @@
 			"password": true,
 			"id": "RemoteDebugPassword",
 			"description": "Password for remote debug user"
+		},
+		{
+			"type": "promptString",
+			"id": "BlackMagicRTT",
+			"description": "BlackMagic RTT: <tty_device> or <ip:port>",
+			"default": "192.168.1.100:2332"
 		}
 	],
 	"version": "2.0.0"
