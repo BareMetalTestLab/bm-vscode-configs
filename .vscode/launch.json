@@ -187,6 +187,7 @@
             "device": "${config:bm.deviceName}",
             "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
             "runToEntryPoint": "main",
+            "preLaunchTask": "BlackMagic RTT Terminal",
             "preLaunchCommands": [
                 "monitor rtt enable",
                 "python import gdb; addr = int(gdb.parse_and_eval('&_SEGGER_RTT')); gdb.execute(f'monitor rtt ram {addr:#x} {addr+0x1000:#x}')",
@@ -203,6 +204,7 @@
             "interface": "swd",
             "device": "${config:bm.deviceName}",
             "svdFile": "${workspaceFolder}/${config:bm.svdFileName}",
+            "preLaunchTask": "BlackMagic RTT Terminal",
             "preAttachCommands": [
                 "monitor rtt enable",
                 "python import gdb; addr = int(gdb.parse_and_eval('&_SEGGER_RTT')); gdb.execute(f'monitor rtt ram {addr:#x} {addr+0x1000:#x}')",

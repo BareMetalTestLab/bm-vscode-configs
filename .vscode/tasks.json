@@ -36,9 +36,26 @@
 		{
 			"label": "BlackMagic RTT Terminal",
 			"type": "shell",
-			"command": "TARGET='${input:BlackMagicRTT}'; if [[ $TARGET == *:* ]]; then nc ${TARGET%%:*} ${TARGET##*:}; else screen $TARGET 115200; fi",
+			"command": "echo 'Starting RTT...'; TARGET='${input:BlackMagicRTT}'; if [[ $TARGET == *:* ]]; then nc ${TARGET%%:*} ${TARGET##*:}; else screen $TARGET 115200; fi",
 			"isBackground": true,
-			"problemMatcher": [],
+			"problemMatcher": [
+				{
+					"owner": "blackmagic-rtt",
+					"pattern": [
+						{
+							"regexp": "^$",
+							"file": 1,
+							"line": 1,
+							"message": 1
+						}
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": "Starting RTT",
+						"endsPattern": "Starting RTT"
+					}
+				}
+			],
 			"presentation": {
 				"echo": true,
 				"reveal": "always",
@@ -70,7 +87,7 @@
 		{
 			"type": "promptString",
 			"id": "BlackMagicRTT",
-			"description": "BlackMagic RTT: <tty_device> or <ip:port>",
+			"description": "BlackMagic RTT: tty device or ip:port",
 			"default": "192.168.1.100:2332"
 		}
 	],
