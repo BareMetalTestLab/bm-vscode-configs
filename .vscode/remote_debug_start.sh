@@ -5,7 +5,7 @@ ip_host="${remote_debug_host:-${2}}"
 password="${remote_debug_password:-${3}}"
 
 if [ -z "$host_name" ] || [ -z "$ip_host" ]; then
-    echo "Usage: $0 <host_name> <remote_host> or set bm.remoteHostName and bm.remoteHost in settings.json"
+    echo "Usage: $0 <host_name> <remote_host> or set jlink_remote.hostName and bm.remoteHost in settings.json"
     exit 1
 fi
 

@@ -3,7 +3,7 @@
 		{
 			"label": "RemoteDebugSetup",
 			"type": "shell",
-			"command": "remote_debug_host_name=${config:bm.remoteHostName} remote_debug_host=${input:IPAddressID} remote_debug_password=${input:RemoteDebugPassword} bash .vscode/remote_debug_start.sh",
+			"command": "remote_debug_host_name=${config:jlink_remote.hostName} remote_debug_host=${input:IPAddressID} remote_debug_password=${input:RemoteDebugPassword} bash .vscode/remote_debug_start.sh",
 			"isBackground": true,
 			"problemMatcher": {
 				"pattern": [
@@ -23,8 +23,8 @@
 			"group": "build",
 			"options": {
 				"env": {
-					"bm_deviceName": "${config:bm.deviceName}",
-					"bm_jlinkSerial": "${config:bm.jlinkSerial}"
+					"bm_deviceName": "${config:target.deviceName}",
+					"bm_jlinkSerial": "${config:jlink.serial}"
 				}
 			}
 		},
