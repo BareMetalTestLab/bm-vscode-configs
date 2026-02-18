@@ -1,0 +1,9 @@
+{
+    "target.firmwareFileName": "/build/firmware.elf",
+    "target.svdFileName": "STM32F103.svd",
+    "target.deviceName": "STM32F103RE",
+    "jlink_remote.hostName": "host_name",
+    "jlink.serial": "772440171",
+    
+    "debug.onTaskErrors": "debugAnyway"
+}
