@@ -40,8 +40,8 @@ This repository is a template for baremetal embedded projects, optimized for dev
    "target.firmwareFileName": "robocontroller-application-without-boot.elf", // your firmware ELF file name
    "target.svdFileName": "STM32F765.svd", // your SVD file name
    "target.deviceName": "STM32F765ZG", // your MCU device name (used for both debug and J-Link 
-   "jlink_remote.hostName": "host", // your J-Link serial number (for remote debug)
-   "jlink.serial": "772440171", // SSH user name for remote debug server
+   "jlink.serial": "772440171", // your J-Link serial number 
+   "jlink_remote.hostName": "host", // SSH user name for remote debug server(for remote debug)
 
    "debug.onTaskErrors": "debugAnyway" // Optional: continue debugging even if preLaunchTask has errors
 }
