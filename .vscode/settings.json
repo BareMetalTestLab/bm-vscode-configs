@@ -1,6 +1,6 @@
 {
-    "target.firmwareFileName": "/build/firmware.elf",
-    "target.svdFileName": "STM32F103.svd",
+    "target.firmwareFileName": "/path/to/your/project/build/firmware.elf",
+    "target.svdFileName": "/path/to/your/project/STM32F103.svd",
     "target.deviceName": "STM32F103RE",
     "jlink_remote.hostName": "host_name",
     "jlink.serial": "772440171",
